@@ -3,8 +3,8 @@ import zipfile
 from pathlib import Path
 
 gpx_dir = Path('FIT_OUT')
-
-for file_path in gpx_dir.glob('*.fit'):
+print()
+for file_path in gpx_dir.glob('*.zip'):
     # Check if the file is secretly a zip file
     if zipfile.is_zipfile(file_path):
         print(f'Extracting ZIP payload inside: {file_path.name}')

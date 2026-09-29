@@ -11,7 +11,7 @@
     "@math.gl/web-mercator": "^4.1.0",
     "@svgr/plugin-svgo": "^8.1.0",
     "@vercel/analytics": "^2.0.1",
-    "@vitejs/plugin-react": "^6.0.1",
+    "@vitejs/plugin-react": "^6.1.1",
     "gcoord": "^1.0.7",
     "mapbox-gl": "^3.23.0",
     "rc-virtual-list": "^3.19.2",

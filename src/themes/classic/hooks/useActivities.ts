@@ -84,9 +84,14 @@ const processActivities = (activityData: Activity[]): ProcessedActivities => {
       if (path.length > 0) {
         detectedCountry = countryFromCoordinates(path[0]);
 
-        if (detected) {
-          console.log('PAÍS POR GPS:', run.run_id, run.name, path[0], detected);
-          detectedCountry = detected;
+        if (detectedCountry) {
+          console.log(
+            'PAÍS POR GPS:',
+            run.run_id,
+            run.name,
+            path[0],
+            detectedCountry
+          );
         } else {
           console.log('GPS SIN PAÍS:', run.run_id, run.name, path[0]);
         }

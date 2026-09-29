@@ -1,6 +1,8 @@
 import type { Activity, SportFilter } from '../types';
 import { useLocale } from '../hooks/useLocale';
 import { formatDistance, parseMovingTime } from '../hooks/useActivities';
+import { countryFromCoordinates } from '../themes/classic/utils/countryFromCoordinates';
+import { pathForRun } from '../themes/classic/utils/geoUtils';
 import { AVATAR } from '../config';
 
 interface ProfileCardProps {
@@ -34,8 +36,43 @@ export function ProfileCard({ activities, filter = 'all' }: ProfileCardProps) {
 
   for (const a of activities) {
     const loc = a.location_country;
-    if (!loc || loc === 'None' || loc === 'null') continue;
 
+    if (!loc || loc === 'None' || loc === 'null') {
+      const path = pathForRun(a);
+
+      if (path.length > 0) {
+        const pointsToCheck = [
+          path[0],
+          path[Math.floor(path.length / 2)],
+          path[path.length - 1],
+        ].filter(Boolean);
+
+        let detectedCountry: string | null = null;
+
+        for (const point of pointsToCheck) {
+          detectedCountry = countryFromCoordinates(point);
+          if (detectedCountry) {
+            break;
+          }
+        }
+
+        if (
+          a.name.toLowerCase().includes('lisbon') ||
+          a.name.toLowerCase().includes('almada') ||
+          a.name.toLowerCase().includes('berlin') ||
+          a.name.toLowerCase().includes('cardiff') ||
+          a.name.toLowerCase().includes('prague')
+        ) {
+          console.log('[COUNTRY DEBUG]', a.name, path[0], detectedCountry);
+        }
+
+        if (detectedCountry) {
+          countries.add(detectedCountry);
+        }
+      }
+
+      continue;
+    }
     let parsedCountry: string | null = null;
     let parsedProvince: string | null = null;
 

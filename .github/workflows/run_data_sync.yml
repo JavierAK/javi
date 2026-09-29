@@ -209,7 +209,7 @@ jobs:
         if: env.RUN_TYPE == 'tulipsport'
         run: |
           python run_page/tulipsport_sync.py ${{ secrets.TULIPSPORT_TOKEN }} --with-gpx
- 
+
       - name: Run sync Oppo heytap script, note currently this script is not worked
         if: env.RUN_TYPE == 'oppo'
         run: |

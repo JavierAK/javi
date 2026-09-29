@@ -86,9 +86,7 @@ export function PersonalBest({
             }`}
             onClick={() => activity && onSelectActivity?.(activity)}
           >
-            <span className="text-xs text-[var(--color-text)]">
-              {t(key)}
-            </span>
+            <span className="text-xs text-[var(--color-text)]">{t(key)}</span>
             <span
               className={`font-mono text-xs font-bold ${activity ? 'text-[var(--color-accent)]' : 'text-[var(--color-muted)]'}`}
             >

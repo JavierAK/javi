@@ -22,6 +22,7 @@
    - For old data: To include `Elevation Gain` for past activities, perform a full reimport.
    - To show the 'Elevation Gain' column, modify `SHOW_ELEVATION_GAIN` in `src/utils/const.ts`
    - note: `Elevation Gain` may be inaccurate. You can use Strava's "Correct Elevation" or Garmin's "Elev Corrections" feature for more precise data.
+
 6. 本项目现在默认使用 MapCN（免费）。如果你选择使用 Mapbox，请获取你自己的 token。请勿使用项目维护者的 token - 查看此 [issue](https://github.com/yihong0618/running_page/issues/643) 和 [issue #1055](https://github.com/yihong0618/running_page/issues/1055)
 
 ![running_page](https://socialify.git.ci/yihong0618/running_page/image?description=1&font=Inter&forks=1&issues=1&language=1&logo=https%3A%2F%2Fraw.githubusercontent.com%2Fshaonianche%2Fgallery%2Fmaster%2Frunning_page%2Frunning_page_logo_150*150.jpg&owner=1&pulls=1&stargazers=1&theme=Light)
@@ -129,7 +130,8 @@ R.I.P. 希望大家都能健康顺利的跑过终点，逝者安息。
 | [Niewei Yang](https://github.com/Niewei-Yang)     | <https://neewii-worksout.vercel.app/>          | Strava      |
 | [RUN.LOG](https://github.com/bzzd2001)            | <https://run.731558.xyz:6881/>                 | Strava      |
 | [StoneRicky](https://github.com/StoneRicky)       | <https://stonericky.github.io/running_page/>   | COROS       |
-| [coutureone](https://github.com/coutureone)          | <https://run.xcouture.cc/>                     | Garmin      |
+| [coutureone](https://github.com/coutureone)       | <https://run.xcouture.cc/>                     | Garmin      |
+
 </details>
 
 ## 它是怎么工作的
@@ -263,12 +265,14 @@ docker run -itd -p 80:80   running_page:latest
 > **安全提示**: Mapbox token 已从 `src/themes/classic/utils/const.ts` 迁移到 `config.yml` 以获得更好的安全管理。
 >
 > **对于 GitHub Actions / 自动部署**:
+>
 > 1. 进入你的仓库 **Settings → Secrets and variables → Actions**
 > 2. 创建名为 `MAPBOX_TOKEN` 的 Secret，填入你的 Mapbox token 值
 > 3. 构建过程会在 GitHub Actions 工作流执行时自动注入该 token
 > 4. **不要**在仓库中提交你的 token
 >
 > **优先级顺序**：
+>
 > - GitHub Actions Secret (`MAPBOX_TOKEN` 环境变量) 优先级最高
 > - 如果 Secret 未设置，则回退到 `config.yml` 中的 mapbox_token
 > - 如果都未设置，则默认为空字符串
@@ -276,18 +280,21 @@ docker run -itd -p 80:80   running_page:latest
 设置你的 [Mapbox token](https://www.mapbox.com/) 有以下几种方式：
 
 **方式 1：GitHub Actions Secret（推荐用于 GitHub Pages）**
+
 ```bash
 # 将 MAPBOX_TOKEN 添加到仓库 Secrets
 # config.yml 中无需改动 - 会自动使用 Secret 中的 token
 ```
 
 **方式 2：本地开发编辑 config.yml**
+
 ```yaml
 # config.yml
 mapbox_token: 'pk.eyJ1...your-token-here'
 ```
 
 **方式 3：本地开发使用环境变量**
+
 ```bash
 export VITE_MAPBOX_TOKEN='pk.eyJ1...your-token-here'
 pnpm develop
@@ -333,6 +340,7 @@ MapCN 是免费的地图服务提供商，现在是默认选项，无需配置�
 本项目模板已在地图显示中包含了相应的版权声明。
 
 ## 使用其他提供商
+
 如果你更喜欢 Mapbox、MapTiler 或 Stadia Maps，你可以更改供应商：
 
 ```typescript
@@ -370,18 +378,18 @@ theme_preset: classic
 
 ```yaml
 # config.yml
-mapbox_token: 'your-token-here'   # https://account.mapbox.com
-avatar: 'https://...'              # 头像 URL
-locale: zh                         # zh | en
-theme: dark                        # system | light | dark
-theme_preset: dashboard            # dashboard | classic | 自定义
+mapbox_token: 'your-token-here' # https://account.mapbox.com
+avatar: 'https://...' # 头像 URL
+locale: zh # zh | en
+theme: dark # system | light | dark
+theme_preset: dashboard # dashboard | classic | 自定义
 
 goals:
   Run:
-    yearly: 2000                   # 年度目标 (km)
-    monthly: 150                   # 月度目标 (km)
-    weekly: 35                     # 周度目标 (km)
-    unit: distance                 # distance (km) | time (分钟)
+    yearly: 2000 # 年度目标 (km)
+    monthly: 150 # 月度目标 (km)
+    weekly: 35 # 周度目标 (km)
+    unit: distance # distance (km) | time (分钟)
 ```
 
 > 隐私保护：设置下面环境变量：

@@ -9,7 +9,11 @@ interface ICity {
 export const COUNTRY_STANDARDIZATION: ReadonlyArray<[string, string]> = [
   ['美利坚合众国', '美国'], // United States: long form → short form
   ['奧地利', '奥地利'], // Austria: Traditional → Simplified Chinese
-  ['英国', '英国'], // United Kingdom
+  ['西班牙', 'España'],
+  ['捷克', 'Chequia'],
+  ['英国;英國', 'Reino Unido'],
+  ['英国', 'Reino Unido'],
+  ['英國', 'Reino Unido'],
   ['印度尼西亚', '印度尼西亚'], // Indonesia
   ['韩国', '韩国'], // South Korea
   ['斯里兰卡', '斯里兰卡'], // Sri Lanka

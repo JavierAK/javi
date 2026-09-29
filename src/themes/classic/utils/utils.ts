@@ -158,16 +158,35 @@ const locationForRun = (
       // try to extract city coord from location_country info
       coordinate = extractCoordinate(location);
     }
-    const l = location.split(',');
-    // or to handle keep location format
-    let countryMatch = l[l.length - 1].match(
-      /[\u4e00-\u9fa5].*[\u4e00-\u9fa5]/
-    );
-    if (!countryMatch && l.length >= 3) {
-      countryMatch = l[2].match(/[\u4e00-\u9fa5].*[\u4e00-\u9fa5]/);
-    }
-    if (countryMatch) {
-      [country] = countryMatch;
+
+    const l = location.split(',').map((part) => part.trim());
+
+    const countryPatterns = [
+      /西班牙/,
+      /捷克/,
+      /英国|英國/,
+      /德国|德國/,
+      /葡萄牙/,
+      /法国|法國/,
+      /意大利|義大利/,
+      /奥地利|奧地利/,
+      /荷兰|荷蘭/,
+      /比利时|比利時/,
+      /瑞士/,
+      /丹麦|丹麥/,
+      /瑞典/,
+      /挪威/,
+      /芬兰|芬蘭/,
+      /波兰|波蘭/,
+      /爱尔兰|愛爾蘭/,
+    ];
+
+    for (const part of l) {
+      const match = countryPatterns.find((pattern) => pattern.test(part));
+      if (match) {
+        country = part;
+        break;
+      }
     }
   }
   if (MUNICIPALITY_CITIES_ARR.includes(city)) {

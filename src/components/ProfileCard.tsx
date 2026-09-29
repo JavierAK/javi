@@ -1,9 +1,6 @@
 import type { Activity, SportFilter } from '../types';
 import { useLocale } from '../hooks/useLocale';
-import {
-  formatDistance,
-  parseMovingTime,
-} from '../hooks/useActivities';
+import { formatDistance, parseMovingTime } from '../hooks/useActivities';
 import { AVATAR } from '../config';
 
 interface ProfileCardProps {
@@ -59,7 +56,7 @@ export function ProfileCard({ activities, filter = 'all' }: ProfileCardProps) {
       }
     }
 
-    // 2. Fallback parsing for raw strings (e.g., "Panama", "Spain", "Costa Rica, San Jose")
+    // 2. Fallback parsing for raw strings (e.g., "Spain", "Costa Rica, San Jose")
     if (!parsedCountry) {
       const parts = loc.split(',').map((p) => p.trim());
       if (parts.length > 1) {

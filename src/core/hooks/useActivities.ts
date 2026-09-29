@@ -18,24 +18,81 @@ export function extractProvince(loc: string | null): string | null {
     return null;
   }
 
-  // 巴拿马省份与自治区
-  const panamaProvinces = [
-    'Bocas del Toro',
-    'Coclé',
-    'Colón',
-    'Chiriquí',
-    'Darién',
-    'Herrera',
-    'Los Santos',
-    'Panamá',
-    'Panamá Oeste',
-    'Veraguas',
-    'Guna Yala',
-    'Emberá-Wounaan',
-    'Ndgbe-Buglé',
+  const spainProvinces = [
+    'Illes Balears',
+    'Asturias',
+    'A Coruña',
+    'Girona',
+    'Las Palmas',
+    'Pontevedra',
+    'Santa Cruz De Tenerife',
+    'Cantabria',
+    'Málaga',
+    'Almería',
+    'Murcia',
+    'Albacete',
+    'Ávila',
+    'Araba/Álava',
+    'Badajoz',
+    'Alacant/Alicante',
+    'Ourense',
+    'Barcelona',
+    'Burgos',
+    'Cáceres',
+    'Cádiz',
+    'Castelló/Castellón',
+    'Ciudad Real',
+    'Jaén',
+    'Córdoba',
+    'Cuenca',
+    'Granada',
+    'Guadalajara',
+    'Gipuzkoa/Guipúzcoa',
+    'Huelva',
+    'Huesca',
+    'León',
+    'Lleida',
+    'La Rioja',
+    'Soria',
+    'Navarra',
+    'Ceuta',
+    'Lugo',
+    'Madrid',
+    'Palencia',
+    'Salamanca',
+    'Segovia',
+    'Sevilla',
+    'Toledo',
+    'Tarragona',
+    'Teruel',
+    'València/Valencia',
+    'Valladolid',
+    'Bizkaia/Vizcaya',
+    'Zamora',
+    'Zaragoza',
+    'Melilla',
   ];
 
-  for (const p of panamaProvinces) {
+  const provinceAliases: Record<string, string> = {
+    'comunidad de madrid': 'Madrid',
+    'región de murcia': 'Murcia',
+    華倫西亞省: 'València/Valencia',
+    valència: 'València/Valencia',
+    valencia: 'València/Valencia',
+    barcelona: 'Barcelona',
+    cáceres: 'Cáceres',
+    sevilla: 'Sevilla',
+  };
+
+  const lowerLoc = loc.toLowerCase();
+
+  for (const [alias, province] of Object.entries(provinceAliases)) {
+    if (lowerLoc.includes(alias)) {
+      return province;
+    }
+  }
+
+  for (const p of spainProvinces) {
     if (loc.toLowerCase().includes(p.toLowerCase())) {
       return p;
     }
@@ -144,7 +201,9 @@ export function useFilteredActivities(
   }, [activities, filter, year]);
 }
 
-export function parseMovingTime(time: string | number | undefined | null): number {
+export function parseMovingTime(
+  time: string | number | undefined | null
+): number {
   if (!time) return 0;
 
   if (typeof time === 'number') {
@@ -168,7 +227,7 @@ export function parseMovingTime(time: string | number | undefined | null): numbe
     if (str.includes(' ')) {
       const parts = str.split(' ');
       const datePart = parts[0]; // e.g., "1970-01-02"
-      str = parts[1];            // e.g., "10:44:26.134000"
+      str = parts[1]; // e.g., "10:44:26.134000"
 
       const dateComponents = datePart.split('-');
       if (dateComponents.length === 3) {

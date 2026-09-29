@@ -18,7 +18,7 @@ import { ProfileCard } from '@/components/ProfileCard';
 import { PersonalBest } from '@/components/PersonalBest';
 import { TracksPage } from '@/components/TracksPage';
 // import { ChinaMap } from '@/components/ChinaMap';
-import { PanamaMap } from '@/components/PanamaMap';
+import { SpainMap } from '@/components/SpainMap';
 
 type Page = 'home' | 'tracks';
 
@@ -94,7 +94,7 @@ function Dashboard() {
             {/* Right column */}
             <div className="flex min-w-0 flex-col gap-6 overflow-hidden">
               <ProfileCard activities={activities} filter={filter} />
-              <PanamaMap
+              <SpainMap
                 activities={filtered}
                 filter={filter}
                 selectedProvince={selectedProvince}

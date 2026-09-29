@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import type { Activity } from '../utils/utils';
 import { locationForRun, titleForRun } from '../utils/utils';
+import { countryFromCoordinates } from '../utils/countryFromCoordinates';
+import { pathForRun } from '../utils/geoUtils';
 import activitiesUrl from '@/static/activities.json?url';
 import { COUNTRY_STANDARDIZATION } from '../static/city';
 
@@ -54,6 +56,9 @@ const getActivityData = () => {
 };
 
 const processActivities = (activityData: Activity[]): ProcessedActivities => {
+  console.log('PROCESS ACTIVITIES EJECUTADO', activityData.length);
+  alert(`CLASSIC useActivities: ${activityData.length} actividades`);
+
   const cities: Record<string, number> = {};
   const runPeriod: Record<string, number> = {};
   const provinces: Set<string> = new Set();
@@ -71,12 +76,33 @@ const processActivities = (activityData: Activity[]): ProcessedActivities => {
     }
 
     const { city, province, country } = location;
+    let detectedCountry = country;
+
+    if (!detectedCountry && run.summary_polyline) {
+      const path = pathForRun(run);
+
+      if (path.length > 0) {
+        detectedCountry = countryFromCoordinates(path[0]);
+
+        if (detected) {
+          console.log('PAÍS POR GPS:', run.run_id, run.name, path[0], detected);
+          detectedCountry = detected;
+        } else {
+          console.log('GPS SIN PAÍS:', run.run_id, run.name, path[0]);
+        }
+      }
+    }
     // drop only one char city
     if (city.length > 1) {
       cities[city] = cities[city] ? cities[city] + run.distance : run.distance;
     }
+
     if (province) provinces.add(province);
-    if (country) countries.add(standardizeCountryName(country));
+
+    if (detectedCountry) {
+      countries.add(standardizeCountryName(detectedCountry));
+    }
+
     const year = run.start_date_local.slice(0, 4);
     years.add(year);
   });

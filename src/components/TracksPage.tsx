@@ -272,7 +272,8 @@ export function TracksPage({
   );
 
   // Determine which sport types exist
-  const hasSport = (tName: SportType) => activities.some((a) => a.type === tName);
+  const hasSport = (tName: SportType) =>
+    activities.some((a) => a.type === tName);
 
   // Filtered base (year + sport)
   const base = activities.filter((a) => {
@@ -403,7 +404,11 @@ export function TracksPage({
           {locale === 'es' ? 'Volver' : locale === 'zh' ? '返回' : 'Back'}
         </button>
         <h1 className="shrink-0 text-lg font-bold">
-          {locale === 'es' ? 'Trayectos' : locale === 'zh' ? '轨迹墙' : 'Track Wall'}
+          {locale === 'es'
+            ? 'Trayectos'
+            : locale === 'zh'
+              ? '轨迹墙'
+              : 'Track Wall'}
         </h1>
       </div>
 
@@ -426,7 +431,11 @@ export function TracksPage({
               </div>
               <div>
                 <p className="text-[10px] tracking-wider text-[var(--color-muted)] uppercase">
-                  {locale === 'es' ? 'Distancia' : locale === 'zh' ? '距离' : 'Distance'}
+                  {locale === 'es'
+                    ? 'Distancia'
+                    : locale === 'zh'
+                      ? '距离'
+                      : 'Distance'}
                 </p>
                 <p className="font-mono text-2xl font-bold">
                   {formatDistance(totalDist)}{' '}
@@ -437,7 +446,11 @@ export function TracksPage({
               </div>
               <div>
                 <p className="text-[10px] tracking-wider text-[var(--color-muted)] uppercase">
-                  {locale === 'es' ? 'Tiempo' : locale === 'zh' ? '时间' : 'Time'}
+                  {locale === 'es'
+                    ? 'Tiempo'
+                    : locale === 'zh'
+                      ? '时间'
+                      : 'Time'}
                 </p>
                 <p className="font-mono text-lg font-bold">
                   {Math.floor(totalTime / 3600)}h{' '}
@@ -447,7 +460,11 @@ export function TracksPage({
               {avgPace > 0 && (
                 <div>
                   <p className="text-[10px] tracking-wider text-[var(--color-muted)] uppercase">
-                    {locale === 'es' ? 'Ritmo Medio' : locale === 'zh' ? '均配速' : 'Avg Pace'}
+                    {locale === 'es'
+                      ? 'Ritmo Medio'
+                      : locale === 'zh'
+                        ? '均配速'
+                        : 'Avg Pace'}
                   </p>
                   <p className="font-mono text-lg font-bold">
                     {formatPace(avgPace)}
@@ -462,7 +479,11 @@ export function TracksPage({
             <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-3">
               <div className="mb-2 flex items-center justify-between gap-2">
                 <p className="text-[10px] tracking-wider text-[var(--color-muted)] uppercase">
-                  {locale === 'es' ? 'Seleccionado' : locale === 'zh' ? '已选记录' : 'Selected'}
+                  {locale === 'es'
+                    ? 'Seleccionado'
+                    : locale === 'zh'
+                      ? '已选记录'
+                      : 'Selected'}
                 </p>
                 <button
                   onClick={() => setSelectedActivity(null)}
@@ -488,18 +509,30 @@ export function TracksPage({
               </p>
               <p className="mb-2 text-[10px] text-[var(--color-muted)]">
                 {new Date(selectedActivity.start_date_local).toLocaleDateString(
-                  locale === 'es' ? 'es-ES' : locale === 'zh' ? 'zh-CN' : 'en-US',
+                  locale === 'es'
+                    ? 'es-ES'
+                    : locale === 'zh'
+                      ? 'zh-CN'
+                      : 'en-US',
                   { year: 'numeric', month: 'short', day: 'numeric' }
                 )}{' '}
                 {new Date(selectedActivity.start_date_local).toLocaleTimeString(
-                  locale === 'es' ? 'es-ES' : locale === 'zh' ? 'zh-CN' : 'en-US',
+                  locale === 'es'
+                    ? 'es-ES'
+                    : locale === 'zh'
+                      ? 'zh-CN'
+                      : 'en-US',
                   { hour: '2-digit', minute: '2-digit' }
                 )}
               </p>
               <div className="grid grid-cols-3 gap-2">
                 <div>
                   <p className="text-[9px] tracking-wider text-[var(--color-muted)] uppercase">
-                    {locale === 'es' ? 'Distancia' : locale === 'zh' ? '距离' : 'Distance'}
+                    {locale === 'es'
+                      ? 'Distancia'
+                      : locale === 'zh'
+                        ? '距离'
+                        : 'Distance'}
                   </p>
                   <p className="font-mono text-base leading-tight font-bold">
                     {(selectedActivity.distance / 1000).toFixed(2)}{' '}
@@ -510,7 +543,11 @@ export function TracksPage({
                 </div>
                 <div>
                   <p className="text-[9px] tracking-wider text-[var(--color-muted)] uppercase">
-                    {locale === 'es' ? 'Tiempo' : locale === 'zh' ? '时间' : 'Time'}
+                    {locale === 'es'
+                      ? 'Tiempo'
+                      : locale === 'zh'
+                        ? '时间'
+                        : 'Time'}
                   </p>
                   <p className="font-mono text-base leading-tight font-bold">
                     {(() => {
@@ -522,7 +559,11 @@ export function TracksPage({
                 {selectedActivity.average_speed > 0 && (
                   <div>
                     <p className="text-[9px] tracking-wider text-[var(--color-muted)] uppercase">
-                      {locale === 'es' ? 'Ritmo' : locale === 'zh' ? '配速' : 'Pace'}
+                      {locale === 'es'
+                        ? 'Ritmo'
+                        : locale === 'zh'
+                          ? '配速'
+                          : 'Pace'}
                     </p>
                     <p className="font-mono text-base leading-tight font-bold">
                       {formatPace(selectedActivity.average_speed)}{' '}
@@ -536,7 +577,11 @@ export function TracksPage({
                   selectedActivity.elevation_gain > 0 && (
                     <div>
                       <p className="text-[9px] tracking-wider text-[var(--color-muted)] uppercase">
-                        {locale === 'es' ? 'Desnivel' : locale === 'zh' ? '爬升' : 'Elev'}
+                        {locale === 'es'
+                          ? 'Desnivel'
+                          : locale === 'zh'
+                            ? '爬升'
+                            : 'Elev'}
                       </p>
                       <p className="font-mono text-base leading-tight font-bold">
                         {Math.round(selectedActivity.elevation_gain)}{' '}
@@ -550,7 +595,11 @@ export function TracksPage({
                   selectedActivity.average_heartrate > 0 && (
                     <div>
                       <p className="text-[9px] tracking-wider text-[var(--color-muted)] uppercase">
-                        {locale === 'es' ? 'FC' : locale === 'zh' ? '心率' : 'HR'}
+                        {locale === 'es'
+                          ? 'FC'
+                          : locale === 'zh'
+                            ? '心率'
+                            : 'HR'}
                       </p>
                       <p className="font-mono text-base leading-tight font-bold">
                         {Math.round(selectedActivity.average_heartrate)}{' '}
@@ -791,14 +840,22 @@ export function TracksPage({
                     onClick={() => setSortBy('date')}
                     className={`transition-colors ${sortBy === 'date' ? 'font-medium text-[var(--color-text)]' : 'hover:text-[var(--color-text)]'}`}
                   >
-                    {locale === 'es' ? 'Fecha' : locale === 'zh' ? '时间' : 'Date'}
+                    {locale === 'es'
+                      ? 'Fecha'
+                      : locale === 'zh'
+                        ? '时间'
+                        : 'Date'}
                   </button>
                   <span className="text-[var(--color-border)]">/</span>
                   <button
                     onClick={() => setSortBy('distance')}
                     className={`transition-colors ${sortBy === 'distance' ? 'font-medium text-[var(--color-text)]' : 'hover:text-[var(--color-text)]'}`}
                   >
-                    {locale === 'es' ? 'Dist' : locale === 'zh' ? '距离' : 'Dist'}
+                    {locale === 'es'
+                      ? 'Dist'
+                      : locale === 'zh'
+                        ? '距离'
+                        : 'Dist'}
                   </button>
                 </div>
               </div>

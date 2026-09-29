@@ -22,7 +22,8 @@
    - For old data: To include `Elevation Gain` for past activities, perform a full reimport.
    - To show the 'Elevation Gain' column, modify `SHOW_ELEVATION_GAIN` in `src/utils/const.ts`
    - note: `Elevation Gain` may be inaccurate. You can use Strava's "Correct Elevation" or Garmin's "Elev Corrections" feature for more precise data.
-6. This project now uses MapCN (free) by default. If you choose to use Mapbox, please get your own token.  Do not use the project maintainer's token - check this [issue](https://github.com/yihong0618/running_page/issues/643) and [issue #1055](https://github.com/yihong0618/running_page/issues/1055)
+
+6. This project now uses MapCN (free) by default. If you choose to use Mapbox, please get your own token. Do not use the project maintainer's token - check this [issue](https://github.com/yihong0618/running_page/issues/643) and [issue #1055](https://github.com/yihong0618/running_page/issues/1055)
 
 <p align="center">
   <img width="150" src="https://raw.githubusercontent.com/shaonianche/gallery/master/running_page/running_page_logo.png" />
@@ -133,6 +134,7 @@ English | [简体中文](https://github.com/yihong0618/running_page/blob/master/
 | [RUN.LOG](https://github.com/bzzd2001)               | <https://run.731558.xyz:6881/>                 | Strava      |
 | [StoneRicky](https://github.com/StoneRicky)          | <https://stonericky.github.io/running_page/>   | COROS       |
 | [coutureone](https://github.com/coutureone)          | <https://run.xcouture.cc/>                     | Garmin      |
+
 </details>
 
 ## How it works
@@ -250,8 +252,9 @@ Open your browser and visit localhost:80
 ```
 
 ### Imperial Units
-* add `--build-arg VITE_USE_IMPERIAL=true` to `docker build ...`
-* add `--units imperial` flag to each `python3 run_page/gen_svg.py ...` command in the [Dockerfile](https://github.com/yihong0618/running_page/blob/master/Dockerfile)
+
+- add `--build-arg VITE_USE_IMPERIAL=true` to `docker build ...`
+- add `--units imperial` flag to each `python3 run_page/gen_svg.py ...` command in the [Dockerfile](https://github.com/yihong0618/running_page/blob/master/Dockerfile)
 
 ## Local sync data
 
@@ -260,12 +263,14 @@ Open your browser and visit localhost:80
 > **Security Notice**: The Mapbox token has been migrated from `src/themes/classic/utils/const.ts` to `config.yml` for better security management.
 >
 > **For GitHub Actions / Automated Deployment**:
+>
 > 1. Go to your repository's **Settings → Secrets and variables → Actions**
 > 2. Create a new secret named `MAPBOX_TOKEN` with your Mapbox token value
 > 3. The build process automatically injects this token during GitHub Actions workflow execution
 > 4. You should NOT commit your token to the repository
 >
 > **Priority Order**:
+>
 > - GitHub Actions Secret (`MAPBOX_TOKEN` env var) takes priority
 > - Falls back to `config.yml` mapbox_token if secret is not set
 > - Defaults to empty string if neither is available
@@ -273,18 +278,21 @@ Open your browser and visit localhost:80
 Set your [Mapbox token](https://www.mapbox.com/) in one of these ways:
 
 **Option 1: GitHub Actions Secret (Recommended for GitHub Pages)**
+
 ```bash
 # Add MAPBOX_TOKEN to your repository secrets
 # No changes needed to config.yml - it will use the secret automatically
 ```
 
 **Option 2: Local Development with config.yml**
+
 ```yaml
 # config.yml
 mapbox_token: 'pk.eyJ1...your-token-here'
 ```
 
 **Option 3: Environment Variable (Local Development)**
+
 ```bash
 export VITE_MAPBOX_TOKEN='pk.eyJ1...your-token-here'
 pnpm develop
@@ -330,6 +338,7 @@ When using MapCN (Carto Basemaps), please ensure you comply with their attributi
 The project template already includes appropriate attribution in the map display.
 
 ## Using Other Providers
+
 If you prefer Mapbox, MapTiler, or Stadia Maps, you can change the vendor:
 
 ```typescript
@@ -367,18 +376,18 @@ All personalization is done through `config.yml` at the project root. Edit this 
 
 ```yaml
 # config.yml
-mapbox_token: 'your-token-here'   # https://account.mapbox.com
-avatar: 'https://...'              # Profile avatar URL
-locale: zh                         # zh | en
-theme: dark                        # system | light | dark
-theme_preset: dashboard            # dashboard | classic | custom
+mapbox_token: 'your-token-here' # https://account.mapbox.com
+avatar: 'https://...' # Profile avatar URL
+locale: zh # zh | en
+theme: dark # system | light | dark
+theme_preset: dashboard # dashboard | classic | custom
 
 goals:
   Run:
-    yearly: 2000                   # Annual distance target (km)
-    monthly: 150                   # Monthly distance target (km)
-    weekly: 35                     # Weekly distance target (km)
-    unit: distance                 # distance (km) | time (minutes)
+    yearly: 2000 # Annual distance target (km)
+    monthly: 150 # Monthly distance target (km)
+    weekly: 35 # Weekly distance target (km)
+    unit: distance # distance (km) | time (minutes)
 ```
 
 - To use Google Analytics, you need to modify the configuration in the `src/utils/analytics.ts` file (if present).
@@ -969,16 +978,16 @@ You can replace `with-gpx` with `with-tcx` to acquire data in tcx format.
 python3 run_page/komoot_sync.py 'your komoot email' 'password' --with-gpx
 ```
 
-| Parameter | Description |
-| --- | --- |
-| `mail` | Login using specified email address |
-| `password` | Use provided password and skip interactive prompt |
-| `-n`, `--anonymous` | Skip authentication, no interactive prompt (valid only with `-d`) |
-| `--with-gpx` | Download all tours as GPX |
-| `-r`, `--remove-deleted` | Remove GPX files (from `--output` dir) without corresponding tour in Komoot (deleted and previous versions) |
-| `--start-date=YYYY-MM-DD` | Filter tours on or after specified date |
-| `--end-date=YYYY-MM-DD` | Filter tours on or before specified date |
-| `-e`, `--no-poi` | Do not include highlights as POIs |
+| Parameter                 | Description                                                                                                 |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `mail`                    | Login using specified email address                                                                         |
+| `password`                | Use provided password and skip interactive prompt                                                           |
+| `-n`, `--anonymous`       | Skip authentication, no interactive prompt (valid only with `-d`)                                           |
+| `--with-gpx`              | Download all tours as GPX                                                                                   |
+| `-r`, `--remove-deleted`  | Remove GPX files (from `--output` dir) without corresponding tour in Komoot (deleted and previous versions) |
+| `--start-date=YYYY-MM-DD` | Filter tours on or after specified date                                                                     |
+| `--end-date=YYYY-MM-DD`   | Filter tours on or before specified date                                                                    |
+| `-e`, `--no-poi`          | Do not include highlights as POIs                                                                           |
 
 </details>
 
@@ -1270,6 +1279,7 @@ Take the keep app as an example. Close the app after running, and then automatic
    1. Get it via icloud [running-page-shortcuts-template](https://www.icloud.com/shortcuts/4a5807a98b9a4e359815ff179c62bacb)
 
    2. Modify the dictionary parameters in the following figure
+
    <center> <img src="https://cdn.jujimeizuo.cn/blog/2023/10/running-page-template.jpg"> </center>
 
 3. Automation

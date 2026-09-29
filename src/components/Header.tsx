@@ -34,8 +34,8 @@ export function Header({ dark, toggleTheme, page, onNavigate }: HeaderProps) {
     locale === 'zh'
       ? 'Switch to English'
       : locale === 'en'
-      ? 'Switch to Spanish'
-      : '切换中文';
+        ? 'Switch to Spanish'
+        : '切换中文';
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/70 backdrop-blur-md">
